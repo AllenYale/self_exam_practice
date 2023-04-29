@@ -3,7 +3,7 @@
 
 using namespace std;
 
-// 定义链表节点结构体
+// 定义链表节点结构体 
 struct ListNode {
     string val;        // 数据域为字符串类型
     ListNode *next;    // 指向下一个节点的指针

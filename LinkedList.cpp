@@ -2,7 +2,7 @@
 
 using namespace std;
 
-// 定义链表节点结构体
+// 定义链表节点结构体 
 struct Node {
     string data; // 节点数据
     Node* next; // 指向下一个节点的指针
