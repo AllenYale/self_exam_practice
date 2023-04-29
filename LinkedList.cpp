@@ -2,23 +2,23 @@
 
 using namespace std;
 
-// ¶¨ÒåÁ´±í½Úµã½á¹¹Ìå
+// å®šä¹‰é“¾è¡¨èŠ‚ç‚¹ç»“æž„ä½“
 struct Node {
-    string data; // ½ÚµãÊý¾Ý
-    Node* next; // Ö¸ÏòÏÂÒ»¸ö½ÚµãµÄÖ¸Õë
+    string data; // èŠ‚ç‚¹æ•°æ®
+    Node* next; // æŒ‡å‘ä¸‹ä¸€ä¸ªèŠ‚ç‚¹çš„æŒ‡é’ˆ
 };
 
-// ¶¨Òåµ¥Á´±íÀà
+// å®šä¹‰å•é“¾è¡¨ç±»
 class LinkedList {
 private:
-    Node* head; // Í·½ÚµãÖ¸Õë
+    Node* head; // å¤´èŠ‚ç‚¹æŒ‡é’ˆ
 public:
-    LinkedList() { // ¹¹Ôìº¯Êý£¬³õÊ¼»¯Í·½Úµã
+    LinkedList() { // æž„é€ å‡½æ•°ï¼Œåˆå§‹åŒ–å¤´èŠ‚ç‚¹
         head = new Node;
         head -> next = NULL;
     }
 
-    ~LinkedList() { // Îö¹¹º¯Êý£¬ÊÍ·ÅÁ´±í¿Õ¼ä
+    ~LinkedList() { // æžæž„å‡½æ•°ï¼Œé‡Šæ”¾é“¾è¡¨ç©ºé—´
         Node* p = head;
         while (p) {
             Node* q = p -> next;
@@ -27,38 +27,38 @@ public:
         }
     }
 
-    void Insert(string s) { // ²åÈë²Ù×÷
+    void Insert(string s) { // æ’å…¥æ“ä½œ
         Node* p = head;
-        while (p -> next && p -> next -> data != s) { // ±éÀúÁ´±í£¬²éÕÒÊÇ·ñÒÑ´æÔÚ¸ÃÊý¾Ý
+        while (p -> next && p -> next -> data != s) { // éåŽ†é“¾è¡¨ï¼ŒæŸ¥æ‰¾æ˜¯å¦å·²å­˜åœ¨è¯¥æ•°æ®
             p = p -> next;
         }
-        if (p -> next == NULL) { // Èô²»´æÔÚÔò²åÈë
-            Node* newNode = new Node; // ÐÂ½¨½Úµã
+        if (p -> next == NULL) { // è‹¥ä¸å­˜åœ¨åˆ™æ’å…¥
+            Node* newNode = new Node; // æ–°å»ºèŠ‚ç‚¹
             newNode -> data = s;
             newNode -> next = p -> next;
             p -> next = newNode;
-            cout << "²åÈë³É¹¦" << endl;
-        } else { // ÒÑ´æÔÚÔò²»²åÈë
-            cout << "¸ÃÊý¾ÝÒÑ´æÔÚ£¬²åÈëÊ§°Ü" << endl;
+            cout << "æ’å…¥æˆåŠŸ" << endl;
+        } else { // å·²å­˜åœ¨åˆ™ä¸æ’å…¥
+            cout << "è¯¥æ•°æ®å·²å­˜åœ¨ï¼Œæ’å…¥å¤±è´¥" << endl;
         }
     }
 
-    void Delete(string s) { // É¾³ý²Ù×÷
+    void Delete(string s) { // åˆ é™¤æ“ä½œ
         Node* p = head;
-        while (p -> next && p -> next -> data != s) { // ±éÀúÁ´±í£¬²éÕÒÊÇ·ñ´æÔÚ¸ÃÊý¾Ý
+        while (p -> next && p -> next -> data != s) { // éåŽ†é“¾è¡¨ï¼ŒæŸ¥æ‰¾æ˜¯å¦å­˜åœ¨è¯¥æ•°æ®
             p = p -> next;
         }
-        if (p -> next) { // Èô´æÔÚ¸Ã½Úµã£¬ÔòÉ¾³ý
+        if (p -> next) { // è‹¥å­˜åœ¨è¯¥èŠ‚ç‚¹ï¼Œåˆ™åˆ é™¤
             Node* q = p -> next;
             p -> next = q -> next;
             delete q;
-            cout << "É¾³ý³É¹¦" << endl;
-        } else { // ·ñÔòÌáÊ¾É¾³ýÊ§°Ü
-            cout << "¸ÃÊý¾Ý²»´æÔÚ£¬É¾³ýÊ§°Ü" << endl;
+            cout << "åˆ é™¤æˆåŠŸ" << endl;
+        } else { // å¦åˆ™æç¤ºåˆ é™¤å¤±è´¥
+            cout << "è¯¥æ•°æ®ä¸å­˜åœ¨ï¼Œåˆ é™¤å¤±è´¥" << endl;
         }
     }
 
-    void PrintList() { // ´òÓ¡Á´±í
+    void PrintList() { // æ‰“å°é“¾è¡¨
         Node* p = head -> next;
         while (p) {
             cout << p -> data << " ";
@@ -69,19 +69,18 @@ public:
 };
 
 int main() {
-    LinkedList list1; // ÐÂ½¨Ò»¸öÁ´±í
-    list1.Insert("hello"); // ²åÈëÊý¾Ý
+    LinkedList list1; // æ–°å»ºä¸€ä¸ªé“¾è¡¨
+    list1.Insert("hello"); // æ’å…¥æ•°æ®
     list1.Insert("world");
-    list1.Insert("hello"); // ÖØ¸´²åÈëÍ¬Ò»Êý¾Ý
-    list1.PrintList(); // ´òÓ¡Á´±í
-    list1.Delete("world"); // É¾³ýÊý¾Ý
-    list1.Delete("world"); // ³¢ÊÔÉ¾³ý²»´æÔÚµÄÊý¾Ý
-    list1.PrintList(); // ´òÓ¡Á´±í
+    list1.Insert("hello"); // é‡å¤æ’å…¥åŒä¸€æ•°æ®
+    list1.PrintList(); // æ‰“å°é“¾è¡¨
+    list1.Delete("world"); // åˆ é™¤æ•°æ®
+    list1.Delete("world"); // å°è¯•åˆ é™¤ä¸å­˜åœ¨çš„æ•°æ®
+    list1.PrintList(); // æ‰“å°é“¾è¡¨
 
     return 0;
 }
 
 /*
-¸Ã³ÌÐòÖÐ£¬Node ½á¹¹Ìå¶¨ÒåÁËµ¥Á´±íÖÐµÄ½Úµã½á¹¹£¬LinkedList Àà°üº¬ÁËµ¥Á´±íµÄ²Ù×÷º¯ÊýºÍÍ·½ÚµãÖ¸Õë£¬Insert º¯ÊýºÍ Delete º¯Êý·Ö±ðÊµÏÖÁË²åÈëºÍÉ¾³ý²Ù×÷£¬PrintList º¯ÊýÓÃÓÚ´òÓ¡µ±Ç°Á´±í¡£ÔÚ main º¯ÊýÖÐ£¬ÎÒÃÇ¿ÉÒÔµ÷ÓÃÕâÐ©º¯Êý½øÐÐµ¥Á´±íµÄ²Ù×÷¡£
+è¯¥ç¨‹åºä¸­ï¼ŒNode ç»“æž„ä½“å®šä¹‰äº†å•é“¾è¡¨ä¸­çš„èŠ‚ç‚¹ç»“æž„ï¼ŒLinkedList ç±»åŒ…å«äº†å•é“¾è¡¨çš„æ“ä½œå‡½æ•°å’Œå¤´èŠ‚ç‚¹æŒ‡é’ˆï¼ŒInsert å‡½æ•°å’Œ Delete å‡½æ•°åˆ†åˆ«å®žçŽ°äº†æ’å…¥å’Œåˆ é™¤æ“ä½œï¼ŒPrintList å‡½æ•°ç”¨äºŽæ‰“å°å½“å‰é“¾è¡¨ã€‚åœ¨ main å‡½æ•°ä¸­ï¼Œæˆ‘ä»¬å¯ä»¥è°ƒç”¨è¿™äº›å‡½æ•°è¿›è¡Œå•é“¾è¡¨çš„æ“ä½œã€‚
 */ 
-
