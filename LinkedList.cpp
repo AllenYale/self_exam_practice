@@ -69,15 +69,15 @@ public:
 };
 
 int main() {
-    LinkedList list1; // 新建一个链表
-    list1.Insert("hello"); // 插入数据
-    list1.Insert("world");
-    list1.Insert("hello"); // 重复插入同一数据
-    list1.PrintList(); // 打印链表
-    list1.Delete("world"); // 删除数据
-    list1.Delete("world"); // 尝试删除不存在的数据
-    list1.PrintList(); // 打印链表
-
+    // LinkedList list1; // 新建一个链表
+    // list1.Insert("hello"); // 插入数据
+    // list1.Insert("world");
+    // list1.Insert("hello"); // 重复插入同一数据
+    // list1.PrintList(); // 打印链表
+    // list1.Delete("world"); // 删除数据
+    // list1.Delete("world"); // 尝试删除不存在的数据
+    // list1.PrintList(); // 打印链表
+    printf("hello world2");
     return 0;
 }
 
