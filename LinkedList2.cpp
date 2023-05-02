@@ -3,11 +3,11 @@
 
 using namespace std;
 
-// 定义链表节点结构体 
+//// 定义链表节点结构体，单链表中，每个节点都包括两部分内容：数据域和指向下一个节点的指针
 struct ListNode {
     string val;        // 数据域为字符串类型
     ListNode *next;    // 指向下一个节点的指针
-    ListNode(string x) : val(x), next(NULL) {}    // 节点构造函数
+    ListNode(string x) : val(x), next(NULL) {}    //// 节点构造函数，将x传入val，该节点的 next 指针初始化为 NULL。
 };
 
 // 定义链表结构体
@@ -21,6 +21,15 @@ public:
         head = new ListNode("");    // 初始化头节点，数据域为空字符串
     }
 
+    ~LinkedList() {        //// 析构函数，程序结束时等释放链表空间
+    ListNode* p = head;
+        while (p) {
+            ListNode* q = p -> next;
+            delete p;
+            p = q;
+        }
+    }
+
     // 链表插入节点
     void insertNode(string str) {
         // 如果链表中已经有该字符串，则不插入
@@ -31,31 +40,31 @@ public:
         // 创建新节点，并将其插入到链表尾部
         ListNode *newNode = new ListNode(str);
         ListNode *p = head;
-        while (p->next != NULL) {
+        while (p->next != NULL) {//// 1st insert p->next == null ; 2nd insert 开始 逐个往后找node
             p = p->next;
         }
-        p->next = newNode;
+        p->next = newNode;//// 1st insert head->next=newNode; 2nd insert 开始 让最后一个node next 有newNode
     }
 
     // 链表删除节点
     void deleteNode(string str) {
         ListNode *p = head;
         ListNode *prev = NULL;
-        while (p != NULL) {
-            if (p->val == str) {    // 找到要删除的节点
+        while (p != NULL) {         //// 从head开始找，逐个往后找node，只要没到最后一个node，进入循环；到最后一个node.next = null，找不到要删除节点
+            if (p->val == str) {    //// 是否找到要删除的节点，如果找不是要删除的节点往后找，
                 prev->next = p->next;
                 delete p;    // 释放节点空间
                 return;
             }
-            prev = p;
-            p = p->next;
+            prev = p;   ////（要删除的节点的pre）prev = p （当前节点）
+            p = p->next;    //// 往后找next节点
         }
         cout << "The string does not exist in the linked list." << endl;
     }
 
     // 查找链表中是否存在某个字符串
     bool find(string str) {
-        ListNode *p = head->next;
+        ListNode *p = head->next;   //// 从head的next node开始找，逐个往后找node
         while (p != NULL) {
             if (p->val == str) {
                 return true;
@@ -70,7 +79,7 @@ public:
         ListNode *p = head->next;
         while (p != NULL) {
             cout << p->val << " ";
-            p = p->next;
+            p = p->next;    
         }
         cout << endl;
     }
@@ -78,13 +87,20 @@ public:
 
 int main() {
     LinkedList list;
-    list.insertNode("hello");
-    list.insertNode("world");
-    list.insertNode("c++");
-    list.traverse();    // 输出链表内容：hello world c++
-    list.deleteNode("world");
-    list.traverse();    // 输出链表内容：hello c++
-    list.deleteNode("python");    // 输出：The string does not exist in the linked list.
+    ////添加链表
+    list.insertNode("Hello");
+    list.insertNode("World");
+    list.insertNode("C");
+    list.insertNode("C++");
+    list.insertNode("I love Data Structure");
+    ////遍历链表
+    list.traverse();    // 输出链表内容：Hello World C C++ I love Data Structure
+    ////删除链表
+    list.deleteNode("World");
+    ////删除成功
+    list.traverse();    // 输出链表内容：Hello C C++ I love Data Structure
+    ////删除失败
+    list.deleteNode("python or java");    // 输出：The string does not exist in the linked list.
     return 0;
 }
 /*
