@@ -39,7 +39,7 @@ public:
         }
         // 创建新节点，并将其插入到链表尾部
         ListNode *newNode = new ListNode(str);
-        ListNode *p = head;
+        ListNode *p = head; //定义指针变量存放头节点
         while (p->next != NULL) {//// 1st insert p->next == null ; 2nd insert 开始 逐个往后找node
             p = p->next;
         }
@@ -50,7 +50,7 @@ public:
     void deleteNode(string str) {
         ListNode *p = head;
         ListNode *prev = NULL;
-        while (p != NULL) {         //// 从head开始找，逐个往后找node，只要没到最后一个node，进入循环；到最后一个node.next = null，找不到要删除节点
+        while (p != NULL) {         //// 从head开始找，逐个往后找node，只要没到最后一个node，进入循环；到最后一个node.next = null，找不到要删除节点The string does not exist in the linked list.
             if (p->val == str) {    //// 是否找到要删除的节点，如果找不是要删除的节点往后找，
                 prev->next = p->next;
                 delete p;    // 释放节点空间
@@ -93,6 +93,7 @@ int main() {
     list.insertNode("C");
     list.insertNode("C++");
     list.insertNode("I love Data Structure");
+    list.insertNode("I love Data Structure");   //The string already exists in the linked list.
     ////遍历链表
     list.traverse();    // 输出链表内容：Hello World C C++ I love Data Structure
     ////删除链表
