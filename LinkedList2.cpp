@@ -3,73 +3,77 @@
 
 using namespace std;
 
-//å®šä¹‰ é“¾è¡¨èŠ‚ç‚¹ ç»“æ„ä½“ï¼Œé»˜è®¤publicå±æ€§ã€‚
-//å•é“¾è¡¨ä¸­ï¼Œæ¯ä¸ªèŠ‚ç‚¹éƒ½åŒ…æ‹¬ä¸¤éƒ¨åˆ†å†…å®¹ï¼šæ•°æ®åŸŸå’ŒæŒ‡å‘ä¸‹ä¸€ä¸ªèŠ‚ç‚¹çš„æŒ‡é’ˆ
+//¶¨Òå Á´±í½Úµã ½á¹¹Ìå£¬Ä¬ÈÏpublicÊôĞÔ¡£
+//µ¥Á´±í£¬Ã¿¸ö½Úµã¶¼°üÀ¨Á½²¿·ÖÄÚÈİ£ºÊı¾İÓòºÍÖ¸ÏòÏÂÒ»¸ö½ÚµãµÄÖ¸Õë
 struct ListNode {
-    string val;        // æ•°æ®åŸŸä¸ºå­—ç¬¦ä¸²ç±»å‹
-    ListNode *next;    // æŒ‡å‘ä¸‹ä¸€ä¸ªèŠ‚ç‚¹çš„æŒ‡é’ˆ
-    ListNode(string x) : val(x), next(nullptr) {}    // èŠ‚ç‚¹æ„é€ å‡½æ•°ï¼Œå°†xä¼ å…¥valï¼Œè¯¥èŠ‚ç‚¹çš„ next æŒ‡é’ˆåˆå§‹åŒ–ä¸º NULLã€‚
+    string val;        // Êı¾İÓòÎª×Ö·û´®ÀàĞÍ
+    ListNode *next;    // Ö¸ÏòÏÂÒ»¸ö½ÚµãµÄÖ¸Õë
+    ListNode(string x) : val(x), next(NULL) {}    // ½Úµã¹¹Ôìº¯Êı£¬½«x´«Èëval£¬¸Ã½ÚµãµÄ next Ö¸Õë³õÊ¼»¯Îª NULL¡£
 };
 
-//å®šä¹‰ é“¾è¡¨ ç»“æ„ä½“ï¼Œé»˜è®¤privateå±æ€§
-//é“¾è¡¨ç»“æ„ä½“ä¸­æœ‰é“¾è¡¨å¤´æŒ‡é’ˆå’Œæ“ä½œé“¾è¡¨æ–¹æ³•
+//¶¨Òå Á´±í ½á¹¹Ìå£¬Ä¬ÈÏprivateÊôĞÔ
+//Á´±í½á¹¹ÌåÖĞÓĞÁ´±íÍ·Ö¸ÕëºÍ²Ù×÷Á´±í·½·¨
 class LinkedList {
 private:
-    ListNode *head;    // é“¾è¡¨å¤´æŒ‡é’ˆ
+    ListNode *head;    // Á´±íÍ·Ö¸Õë
 
 public:
-    // é“¾è¡¨åˆå§‹åŒ–
+    // Á´±í³õÊ¼»¯
     LinkedList() {
-        head = new ListNode("");    // åˆå§‹åŒ–å¤´èŠ‚ç‚¹ï¼Œæ•°æ®åŸŸä¸ºç©ºå­—ç¬¦ä¸²
+        head = new ListNode("");    // ³õÊ¼»¯Í·½Úµã£¬Êı¾İÓòÎª¿Õ×Ö·û´®
     }
 
-    ~LinkedList() {        // ææ„å‡½æ•°ï¼Œç¨‹åºç»“æŸæ—¶ç­‰é‡Šæ”¾é“¾è¡¨ç©ºé—´
+    ~LinkedList() {        // Îö¹¹º¯Êı£¬³ÌĞò½áÊøÊ±µÈÊÍ·ÅÁ´±í¿Õ¼ä
     ListNode* p = head;
         while (p) {
             ListNode* q = p -> next;
             delete p;
             p = q;
         }
-        head = nullptr;  // å°†å¤´æŒ‡é’ˆç½®ä¸ºç©ºæŒ‡é’ˆï¼Œé¿å…æ‚¬ç©ºæŒ‡é’ˆçš„é—®é¢˜
+        head = NULL;  // ½«Í·Ö¸ÕëÖÃÎª¿ÕÖ¸Õë£¬±ÜÃâĞü¿ÕÖ¸ÕëµÄÎÊÌâ
     }
 
-    // é“¾è¡¨æ’å…¥èŠ‚ç‚¹
+    // Á´±í²åÈë½Úµã
     void insertNode(string str) {
-        // å¦‚æœé“¾è¡¨ä¸­å·²ç»æœ‰è¯¥å­—ç¬¦ä¸²ï¼Œåˆ™ä¸æ’å…¥
+        // Èç¹ûÁ´±íÖĞÒÑ¾­ÓĞ¸Ã×Ö·û´®£¬Ôò²»²åÈë
         if (find(str)) {
             cout << "The string already exists in the linked list." << endl;
             return;
         }
-        // åˆ›å»ºæ–°èŠ‚ç‚¹ï¼Œå¹¶å°†å…¶æ’å…¥åˆ°é“¾è¡¨å°¾éƒ¨
+        // ´´½¨ĞÂ½Úµã£¬²¢½«Æä²åÈëµ½Á´±íÎ²²¿
         ListNode *newNode = new ListNode(str);
-        ListNode *p = head; //å®šä¹‰æŒ‡é’ˆå˜é‡å­˜æ”¾å¤´èŠ‚ç‚¹
-        while (p->next != nullptr) {// 1st insert p->next == null ; 2nd insert å¼€å§‹ é€ä¸ªå¾€åæ‰¾node
+        ListNode *p = head; //¶¨ÒåÖ¸Õë±äÁ¿´æ·ÅÍ·½Úµã
+        while (p->next != NULL) {// 1st insert p->next == NULL ; 2nd insert ¿ªÊ¼ Öğ¸öÍùºóÕÒnode
             p = p->next;
         }
-        p->next = newNode;// 1st insert head->next=newNode; 2nd insert å¼€å§‹ è®©æœ€åä¸€ä¸ªnode next æœ‰newNode
+        p->next = newNode;// 1st insert head->next=newNode; 2nd insert ¿ªÊ¼ ÈÃ×îºóÒ»¸önode next Ö¸Ïò newNode
     }
 
-    // é“¾è¡¨åˆ é™¤èŠ‚ç‚¹
+    // Á´±íÉ¾³ı½Úµã
     void deleteNode(string str) {
         ListNode *p = head;
-        ListNode *prev = nullptr;
-        //ä»headå¼€å§‹æ‰¾ï¼Œé€ä¸ªå¾€åæ‰¾nodeï¼Œåªè¦æ²¡åˆ°æœ€åä¸€ä¸ªnodeï¼Œè¿›å…¥å¾ªç¯ï¼›åˆ°æœ€åä¸€ä¸ªnode.next = nullï¼Œæ‰¾ä¸åˆ°è¦åˆ é™¤èŠ‚ç‚¹The string does not exist in the linked list.
-        while (p != nullptr) {         //TODOï¼šæµ‹è¯•0522 å¦‚æœåˆ é™¤å¤´èŠ‚ç‚¹ä¼šæ€ä¹ˆæ ·ï¼Ÿ
-            if (p->val == str) {    // p->val == str æ˜¯å¦æ‰¾åˆ°è¦åˆ é™¤çš„èŠ‚ç‚¹ï¼Œå¦‚æœæ‰¾ä¸æ˜¯è¦åˆ é™¤çš„èŠ‚ç‚¹å¾€åæ‰¾
-                prev->next = p->next;   // p->val == str trueï¼Œpæ˜¯è¦åˆ é™¤çš„èŠ‚ç‚¹ï¼Œpåˆ é™¤åï¼Œpçš„nextèµ‹å€¼ä¸ºprevçš„next
-                delete p;    // é‡Šæ”¾è¦åˆ é™¤çš„pèŠ‚ç‚¹ç©ºé—´
+        ListNode *prev = NULL;
+        //´Óhead¿ªÊ¼ÕÒ£¬Öğ¸öÍùºóÕÒnode£¬Ö»ÒªÃ»µ½×îºóÒ»¸önode£¬½øÈëÑ­»·£»µ½×îºóÒ»¸önode.next = NULL£¬ÕÒ²»µ½ÒªÉ¾³ı½ÚµãThe string does not exist in the linked list.
+        while (p != NULL) { 
+            if (p->val == str) {    // p->val == str ÊÇ·ñÕÒµ½ÒªÉ¾³ıµÄ½Úµã£¬Èç¹ûÕÒ²»ÊÇÒªÉ¾³ıµÄ½ÚµãÍùºóÕÒ
+	            if (p->val=="") {
+					cout << "Can't delete the head node" << endl;	//²»ÔÊĞíÉ¾³ıhead½Úµã
+					return;
+				}     
+                prev->next = p->next;   // p->val == str true£¬pÊÇÒªÉ¾³ıµÄ½Úµã£¬pÉ¾³ıºó£¬pµÄnext¸³ÖµÎªprevµÄnext
+                delete p;    // ÊÍ·ÅÒªÉ¾³ıµÄp½Úµã¿Õ¼ä
                 return;
             }
-            prev = p;   // pä¸æ˜¯è¦åˆ é™¤çš„èŠ‚ç‚¹ï¼Œå‡è®¾ï¼ˆpæ˜¯è¦åˆ é™¤çš„èŠ‚ç‚¹çš„å‰ä¸€ä¸ªèŠ‚ç‚¹preï¼‰prev = p ï¼ˆå½“å‰èŠ‚ç‚¹ï¼‰
-            p = p->next;    // pä¸ºç»§ç»­å¾€åæ‰¾çš„nextèŠ‚ç‚¹
+            prev = p;   // p²»ÊÇÒªÉ¾³ıµÄ½Úµã£¬¼ÙÉè£¨pÊÇÒªÉ¾³ıµÄ½ÚµãµÄÇ°Ò»¸ö½Úµãpre£©prev = p £¨µ±Ç°½Úµã£©
+            p = p->next;    // pÎª¼ÌĞøÍùºóÕÒµÄnext½Úµã
         }
         cout << "The string does not exist in the linked list." << endl;
     }
 
-    // æŸ¥æ‰¾é“¾è¡¨ä¸­æ˜¯å¦å­˜åœ¨æŸä¸ªå­—ç¬¦ä¸²
+    // ²éÕÒÁ´±íÖĞÊÇ·ñ´æÔÚÄ³¸ö×Ö·û´®
     bool find(string str) {
-        ListNode *p = head->next;   // ä»headçš„next nodeå¼€å§‹æ‰¾ï¼Œé€ä¸ªå¾€åæ‰¾node
-        while (p != nullptr) {
+        ListNode *p = head->next;   // ´ÓheadµÄnext node¿ªÊ¼ÕÒ£¬Öğ¸öÍùºóÕÒnode
+        while (p != NULL) {
             if (p->val == str) {
                 return true;
             }
@@ -78,11 +82,11 @@ public:
         return false;
     }
 
-    // éå†é“¾è¡¨ï¼Œè¾“å‡ºæ‰€æœ‰èŠ‚ç‚¹çš„æ•°æ®åŸŸ
+    // ±éÀúÁ´±í£¬Êä³öËùÓĞ½ÚµãµÄÊı¾İÓò
     void traverse() {
         ListNode *p = head->next;
-        while (p != nullptr) {
-            cout << p->val << " ";
+        while (p != NULL) {
+            cout << p->val << "\t";
             p = p->next;    
         }
         cout << endl;
@@ -91,37 +95,20 @@ public:
 
 int main() {
     LinkedList list;
-    ////æ·»åŠ é“¾è¡¨
+    ////Ìí¼ÓÁ´±í
     list.insertNode("Hello");
     list.insertNode("World");
     list.insertNode("C");
     list.insertNode("C++");
     list.insertNode("I love Data Structure");
+    ////±éÀúÁ´±í
+    list.traverse();    // Êä³öÁ´±íÄÚÈİ£ºHello World C C++ I love Data Structure
     list.insertNode("I love Data Structure");   //The string already exists in the linked list.
-    ////éå†é“¾è¡¨
-    list.traverse();    // è¾“å‡ºé“¾è¡¨å†…å®¹ï¼šHello World C C++ I love Data Structure
-    ////åˆ é™¤é“¾è¡¨
+    ////É¾³ıÁ´±í
     list.deleteNode("World");
-    list.deleteNode("");// TODOï¼š0522 åˆ é™¤headèŠ‚ç‚¹test
-    ////åˆ é™¤æˆåŠŸ
-    list.traverse();    // è¾“å‡ºé“¾è¡¨å†…å®¹ï¼šHello C C++ I love Data Structure
-    ////åˆ é™¤å¤±è´¥
-    list.deleteNode("doesn't_exist_node");    // è¾“å‡ºï¼šThe string does not exist in the linked list.
+    ////É¾³ı³É¹¦
+    list.traverse();    // Êä³öÁ´±íÄÚÈİ£ºHello C C++ I love Data Structure
+    ////É¾³ıÊ§°Ü
+    list.deleteNode("doesn't_exist_node");    // Êä³ö£ºThe string does not exist in the linked list.
     return 0;
 }
-/*
-
-ç¨‹åºä¸­ä½¿ç”¨äº†ä¸¤ä¸ªç»“æ„ä½“ï¼Œä¸€ä¸ªæ˜¯ ListNode ç»“æ„ä½“è¡¨ç¤ºé“¾è¡¨èŠ‚ç‚¹ï¼ŒåŒ…å«ä¸€ä¸ªå­—ç¬¦ä¸²ç±»å‹çš„æ•°æ®åŸŸ val å’Œä¸€ä¸ªæŒ‡å‘ä¸‹ä¸€ä¸ªèŠ‚ç‚¹çš„æŒ‡é’ˆ nextã€‚å¦ä¸€ä¸ªæ˜¯ LinkedList ç»“æ„ä½“è¡¨ç¤ºé“¾è¡¨æœ¬èº«ï¼ŒåŒ…å«ä¸€ä¸ªæŒ‡å‘é“¾è¡¨å¤´çš„æŒ‡é’ˆ headã€‚
-
-é“¾è¡¨çš„åˆå§‹åŒ–é€šè¿‡ LinkedList çš„æ„é€ å‡½æ•°å®ç°ï¼Œåˆ›å»ºä¸€ä¸ªå¤´èŠ‚ç‚¹ï¼Œå¹¶å°† head æŒ‡å‘è¯¥å¤´èŠ‚ç‚¹ã€‚
-
-é“¾è¡¨æ’å…¥æ“ä½œ insertNode æ¥æ”¶ä¸€ä¸ªå­—ç¬¦ä¸²ä½œä¸ºå‚æ•°ï¼Œå¦‚æœé“¾è¡¨ä¸­å·²ç»å­˜åœ¨è¯¥å­—ç¬¦ä¸²ï¼Œè¾“å‡ºæç¤ºä¿¡æ¯ The string already exists in the linked list. å¹¶è¿”å›ï¼›å¦åˆ™åˆ›å»ºä¸€ä¸ªæ–°èŠ‚ç‚¹ï¼Œå°†å…¶æ’å…¥åˆ°é“¾è¡¨å°¾éƒ¨ã€‚
-
-é“¾è¡¨åˆ é™¤æ“ä½œ deleteNode æ¥æ”¶ä¸€ä¸ªå­—ç¬¦ä¸²ä½œä¸ºå‚æ•°ï¼Œéå†é“¾è¡¨æŸ¥æ‰¾è¦åˆ é™¤çš„èŠ‚ç‚¹ï¼Œå¦‚æœæ‰¾åˆ°ï¼Œåˆ é™¤è¯¥èŠ‚ç‚¹å¹¶é‡Šæ”¾å…¶å†…å­˜ç©ºé—´ï¼›å¦‚æœæœªæ‰¾åˆ°ï¼Œè¾“å‡ºæç¤ºä¿¡æ¯ The string does not exist in the linked list.ã€‚
-
-é“¾è¡¨æŸ¥æ‰¾æ“ä½œ find æ¥æ”¶ä¸€ä¸ªå­—ç¬¦ä¸²ä½œä¸ºå‚æ•°ï¼Œéå†é“¾è¡¨æŸ¥æ‰¾è¯¥å­—ç¬¦ä¸²æ˜¯å¦å­˜åœ¨äºé“¾è¡¨ä¸­ï¼Œå¦‚æœæ‰¾åˆ°ï¼Œè¿”å› trueï¼›å¦åˆ™è¿”å› falseã€‚
-
-é“¾è¡¨éå†æ“ä½œ traverse éå†é“¾è¡¨æ‰€æœ‰èŠ‚ç‚¹ï¼Œå¹¶è¾“å‡ºå„ä¸ªèŠ‚ç‚¹çš„æ•°æ®åŸŸå€¼ã€‚
-
-åœ¨ main å‡½æ•°ä¸­ï¼Œé¦–å…ˆåˆ›å»ºä¸€ä¸ª LinkedList å¯¹è±¡ï¼Œç„¶åä¾æ¬¡è°ƒç”¨ insertNode æ’å…¥ä¸‰ä¸ªå­—ç¬¦ä¸² "hello"ã€"world" å’Œ "c++"ï¼Œéšåè°ƒç”¨ traverse è¾“å‡ºç»“æœã€‚æ¥ç€è°ƒç”¨ deleteNode åˆ é™¤äº†å­—ç¬¦ä¸² "world"ï¼Œå†æ¬¡è°ƒç”¨ traverse è¾“å‡ºé“¾è¡¨å†…å®¹ï¼Œå¯ä»¥çœ‹åˆ°è¯¥å­—ç¬¦ä¸²å·²ç»è¢«åˆ é™¤ã€‚æœ€åè°ƒç”¨ deleteNode åˆ é™¤äº†ä¸å­˜åœ¨çš„å­—ç¬¦ä¸² "python"ï¼Œè¾“å‡ºç›¸åº”æç¤ºä¿¡æ¯ã€‚
-*/
